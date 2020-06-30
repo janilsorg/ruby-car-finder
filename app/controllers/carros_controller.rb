@@ -4,7 +4,12 @@ class CarrosController < ApplicationController
   # GET /carros
   # GET /carros.json
   def index
+    @marcas = Marca.all
+    @teste = params[:marca]
+
     @carros = Carro.all
+    @carros = Carro.where("marca_id = ?", @teste)
+
   end
 
   # GET /carros/1

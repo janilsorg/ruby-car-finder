@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_135637) do
+ActiveRecord::Schema.define(version: 2020_06_30_010632) do
 
   create_table "carros", force: :cascade do |t|
     t.string "nome"
@@ -18,7 +18,19 @@ ActiveRecord::Schema.define(version: 2020_06_28_135637) do
     t.integer "marca_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "modelo_id"
+    t.integer "corpo_id"
+    t.integer "transmission_id"
+    t.index ["corpo_id"], name: "index_carros_on_corpo_id"
     t.index ["marca_id"], name: "index_carros_on_marca_id"
+    t.index ["modelo_id"], name: "index_carros_on_modelo_id"
+    t.index ["transmission_id"], name: "index_carros_on_transmission_id"
+  end
+
+  create_table "corpos", force: :cascade do |t|
+    t.string "body_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "marcas", force: :cascade do |t|
@@ -27,5 +39,28 @@ ActiveRecord::Schema.define(version: 2020_06_28_135637) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "modelos", force: :cascade do |t|
+    t.string "nome_modelo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "modelos_copy", force: :cascade do |t|
+    t.string "nome_modelo"
+    t.integer "carro_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transmissions", force: :cascade do |t|
+    t.string "transmission_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "carros", "corpos"
   add_foreign_key "carros", "marcas"
+  add_foreign_key "carros", "modelos"
+  add_foreign_key "carros", "transmissions"
+  add_foreign_key "modelos_copy", "carros"
 end
