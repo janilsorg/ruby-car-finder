@@ -3,7 +3,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-  <% if @carros.present?%>
+  <% if @got_data %>
 
 
   <div class="col-md-2">
@@ -15,7 +15,14 @@
         <label for="body">Body</label>
         <select class="form-control" name="corpo" id="corpo">
         <option value=''>-- All --</option>
-          
+        <% @corpos.each do |c| %>
+        <option value=<%=c.id %> 
+        <% if (@corpo == c.id.to_s) %>
+          selected="selected"
+        <% end %>
+        
+        ><%=c.body_type %></option>
+        <% end %>
           
         </select>
       </div>
@@ -25,6 +32,14 @@
           <label for="color">Color</label>
           <select class="form-control" name="cor" id="cor">
             <option value=''>-- All --</option>
+            <% @cores.each do |c| %>
+            <option value=<%=c.id %> 
+            <% if (@cor == c.id.to_s) %>
+              selected="selected"
+            <% end %>
+            
+            ><%=c.color_name %></option>
+            <% end %>
           </select>
         </div>  
       </div>
@@ -32,21 +47,21 @@
       <div class="form-group ">
         <div class="d-flex flex-column">
           <label for="price">Max Price</label>
-          <input class="form-control" type="text" name="price" id="m_ini">
+          <input class="form-control" type="text" name="price" id="price" value=<%= @price%> >
         </div>  
       </div>
 
       <div class="form-group ">
         <div class="d-flex flex-column">
           <label for="m_ini">Mileage Min</label>
-          <input class="form-control" type="text" name="m_ini" id="m_ini">
+          <input class="form-control" type="text" name="m_ini" id="m_ini" value=<%= @m_ini%> >
         </div>  
       </div>
       
       <div class="form-group ">
         <div class="d-flex flex-column">
           <label for="m_end">Mileage Max</label>
-          <input class="form-control" type="text" name="m_end" id="m_ini">
+          <input class="form-control" type="text" name="m_end" id="m_end" value=<%= @m_end%> >
         </div>  
       </div>
 
@@ -65,25 +80,44 @@
   <div class="col-md-9">
     
     <div class="row">
+        <% if @carros.present?%>
+        
+        
+        
         <% @carros.each do |carro| %>
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
               
               <div class="card-body">
-                <p class="card-text"><%= carro.nome %></p>
-                <p class="card-text"><%= carro.marca.nome %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="card-text">Model: <%= carro.modelo.nome_modelo %></p>
+                <p class="card-text">Color: <%= carro.cor.color_name %></p>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+              <p class="card-text">Body: <%= carro.corpo.body_type %></p>
+                
+                <p class="card-text">Mileage: <%= carro.mileage %></p>
+              </div>
+                <p>Price: <%= carro.preco %></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <%= link_to 'View', carro, :class => 'btn btn-sm btn-outline-secondary' %>
                     <%= link_to 'Edit', edit_carro_path(carro), :class => 'btn btn-sm btn-outline-secondary' %>
                     <%= link_to 'Destroy', carro, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-sm btn-outline-secondary' %>
                   </div>
-                  <small class="text-muted"><%= carro.ano %></small>
+                  <small class="text-muted">Year <%= carro.ano %></small>
                 </div>
               </div>
             </div>
           </div>
-        <% end %>
+          <% end %>
+
+          <% else %>
+            <div class="container text-center">
+              <h1>No records</h1>
+            </div>
+          <% end %> <!-- END IF THERE IS NO ROW-->
+
       </div>
     
 

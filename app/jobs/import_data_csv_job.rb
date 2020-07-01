@@ -106,38 +106,46 @@ class ImportDataCsvJob < ApplicationJob
           id_transmission = c.id
         end 
         
-        # novo_carro = Carro.new
+        novo_carro = Carro.new
+
+        novo_carro.transmission_id = id_transmission.to_i
+        novo_carro.cor_id = id_cor
+        novo_carro.modelo_id = id_modelo
+        novo_carro.corpo_id = id_corpo
+        novo_carro.marca_id = id_marca
+
+
+        novo_carro.vin =  row[0] #string
+        novo_carro.grade = row[1] #str
+        novo_carro.serie = row[5] #STR
+        novo_carro.ano = row[6] #INT
+        novo_carro.preco = row[7] #INT
+        novo_carro.cilindro = row[9] #SMALLINT
+        novo_carro.displacement = row[10] #ATT STR(4)
+        novo_carro.interior = row[12] #COR
+        novo_carro.mileage = row[13] #INT
+        novo_carro.upholstery = row[15] 
+        novo_carro.enddate = row[16] #DATE
+        novo_carro.abglocation = row[17]
+        novo_carro.drivetrain = row[22] #STR(3)
+        novo_carro.conditionreport = row[23] #URL
+
+        novo_carro.stocknumber = row[2] #empty
+        novo_carro.buydate = row[18] #empty
+        novo_carro.buyername = row[19] #empty
+        novo_carro.watchedby = row[20] #empty
+        novo_carro.dealershipname = row[21] #empty
+        novo_carro.salesrep = row[24] #empty
         
-        # novo_carro.transmission_id = id_transmission
-        # novo_carro.cor_id = id_cor
-        # novo_carro.modelo_id = id_modelo
-        # novo_carro.corpo_id = id_corpo
-        # novo_carro.marca_id = id_marca
+        puts 'Trying to save'
+        novo_carro.save  
+        unless novo_carro.save
+          puts novo_carro.errors
+          puts novo_carro.errors.full_messages
+        end
 
-
-        # novo_carro.vin =  row[0] #string
-        # novo_carro.grade = row[1] #str
-        # novo_carro.serie = row[5] #STR
-        # novo_carro.ano = row[6] #INT
-        # novo_carro.preco = row[7] #INT
-        # novo_carro.cilindro = row[9] #SMALLINT
-        # novo_carro.displacement = row[10] #ATT STR(4)
-        # novo_carro.interior = row[12] #COR
-        # novo_carro.mileage = row[13] #INT
-        # novo_carro.upholstery = row[15] 
-        # novo_carro.enddate = row[16] #DATE
-        # novo_carro.abglocation = row[17]
-        # novo_carro.drivetrain = row[22] #STR(3)
-        # novo_carro.conditionreport = row[23] #URL
-
-        # novo_carro.stocknumber = row[2] #empty
-        # novo_carro.buydate = row[18] #empty
-        # novo_carro.buyername = row[19] #empty
-        # novo_carro.watchedby = row[20] #empty
-        # novo_carro.dealershipname = row[21] #empty
-        # novo_carro.salesrep = row[24] #empty
-        
       end
+      
       cont += 1
     end
     # puts cont

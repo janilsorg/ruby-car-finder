@@ -4,40 +4,57 @@ class CarrosController < ApplicationController
   # GET /carros
   # GET /carros.json
   def index
-    ImportDataCsvJob.perform_later
+    # ImportDataCsvJob.perform_later
+  
+    @carros = Carro.all.limit(20)
     
-    # cor, mileage, body, price
-
-    # Cor TO DO - filter variable
-    @cores = Cor.all
-    @cor = params[:cor]
-    if  @cor.nil? || @cor.empty?
-      @cores = Cor.all
+    if @carros.length > 0
+      @got_data = true
     else
-      @cores = Cor.where("cor_id = ?", @cor)
+      @got_data = false
+    end
+
+    @cor = params[:cor]
+    @cores = Cor.all
+    if  @cor.nil? || @cor.empty?
+      # @cores = Cor.all
+    else
+      @carros = @carros.where("cor_id = ?", @cor)
     end 
 
     # Body - Corpo, body_type
     @corpos = Corpo.all
-    @corpo = params[:body]
+    @corpo = params[:corpo]
     if  @corpo.nil? || @corpo.empty?
-      @carros = Carro.all
+      # 
     else
-      @carros = Carro.where("corpo_id = ?", @corpo)
+      @carros = @carros.where("corpo_id = ?", @corpo)
     end 
 
+    
     # mileage
-    # price
-
-    # Marca
-    @marcas = Marca.all
-    @marca = params[:marca]
-    if  @marca.nil? || @marca.empty?
-      @carros = Carro.all
+    @m_ini = params[:m_ini]
+    if  @m_ini.nil? || @m_ini.empty?
+      # 
     else
-      @carros = Carro.where("marca_id = ?", @marca)
+      @carros = @carros.where("mileage >= ?", @m_ini)
     end 
 
+    @m_end = params[:m_end]
+    if  @m_end.nil? || @m_end.empty?
+      # 
+    else
+      @carros = @carros.where("mileage >= ?", @m_end)
+    end 
+
+    # price
+    @price = params[:price]
+    if  @price.nil? || @price.empty?
+      # 
+    else
+      @carros = @carros.where("preco >= ?", @price)
+    end 
+    
 
   end
 
