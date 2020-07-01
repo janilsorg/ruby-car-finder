@@ -1,24 +1,32 @@
-# README
+# RUBY ON RAILS CAR FINDER
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Ruby on Rails application
+<p>
+The idea was to create a page where the cars are displayed with a few informations. Then, you can have the option to click on it and see the whole set of informations. Among these informations there is a link to a condition report
+</p>
+<p>
+All the data used for this project is inside the file on app/data/vehicles_list.csv.
+</p>
+<p>
+In order to import this data to the SQLite database, I've created a job script located in app/jobs/import_data_csv_job.rb which will delete all data from database and the import everything from the CSV file and normalize a few columns
+</p>
 
-Things you may want to cover:
+## RUNNING THE APPLICATION
+<p>Run the bundle install</p>
+```
+bundle install
+```
+<p>Run the migration</p>
+```
+rails db:migrate
+```
 
-* Ruby version
+<p>Run the server</p>
+```
+rails s
+```
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Improvements and thoughts
+ - I think I shall re analyse the normalization due to the many DB request the index makes in order to get the lookup fields such as BODY, COLORS, etc
+ 
