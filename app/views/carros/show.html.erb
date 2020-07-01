@@ -1,19 +1,111 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @carro.nome %>
-</p>
+<div class="container">
+<%= link_to 'Back', carros_path, :class => 'btn btn-sm btn-outline-secondary' %>
+<h3>Car Detail</h3>
+<table class="table table-hover">
 
-<p>
-  <strong>Ano:</strong>
-  <%= @carro.ano %>
-</p>
+<tbody>
+<tr>
+  <td>Condition Report</td>
+  <td>
+  <a class="btn btn-primary text-white" href="<%= @carro.conditionreport %>" target="_blank" rel="Condition Report"> Download</a>
+  </td>
+</tr>
+<tr>
+  <td>Make</td>
+  <td><%= @carro.marca.nome %></td>
+</tr>
+<tr>
+  <td>Model</td>
+  <td><%= @carro.modelo.nome_modelo %></td>
+</tr>
+<tr>
+  <td>Body</td>
+  <td><%= @carro.corpo.body_type %></td>
+</tr>
+<tr>
+  <td>Color</td>
+  <td><%= @carro.cor.color_name %></td>
+</tr>
+<tr>
+  <td>Year</td>
+  <td><%= @carro.ano %></td>
+</tr>
+<tr>
+  <td>Transmission</td>
+  <td><%= @carro.transmission.transmission_type %></td>
+</tr>
+<tr>
+  <td>VIN</td>
+  <td><%= @carro.vin %></td>
+</tr>
+<tr>
+  <td>Grade</td>
+  <td><%= @carro.grade %></td>
+</tr>
+<tr>
+  <td>Serie</td>
+  <td><%= @carro.serie %></td>
+</tr>
+<tr>
+  <td>Price</td>
+  <td><%= @carro.preco %></td>
+</tr>
+<tr>
+  <td>Cilinder</td>
+  <td><%= @carro.cilindro %></td>
+</tr>
+<tr>
+  <td>Displacement</td>
+  <td><%= @carro.displacement %></td>
+</tr>
+<tr>
+  <td>Interior</td>
+  <td><%= @carro.interior %></td>
+</tr>
+<tr>
+  <td>Mileage</td>
+  <td><%= @carro.mileage %></td>
+</tr>
+<tr>
+  <td>Upholstery</td>
+  <td><%= @carro.upholstery %></td>
+</tr>
+<tr>
+  <td>End Date</td>
+  <td><%= @carro.enddate %></td>
+</tr>
+<tr>
+  <td>Abg Location</td>
+  <td><%= @carro.abglocation %></td>
+</tr>
+<tr>
+  <td>Drivetrain</td>
+  <td><%= @carro.drivetrain %></td>
+</tr>
 
-<p>
-  <strong>Marca:</strong>
-  <%= @carro.marca_id %>
-</p>
+<tr>
+  <td>Stocknumber</td>
+  <td><%= @carro.stocknumber %></td>
+</tr>
+<tr>
+  <td>Buy Date</td>
+  <td><%= @carro.buydate %></td>
+</tr>
+<tr>
+  <td>Watched by</td>
+  <td><%= @carro.watchedby %></td>
+</tr>
+<tr>
+  <td>Dealershipname</td>
+  <td><%= @carro.dealershipname %></td>
+</tr>
+<tr>
+  <td>Sales Rep</td>
+  <td><%= @carro.salesrep %></td>
+</tr>
+</tbody>
+</table>
+</div>
 
-<%= link_to 'Edit', edit_carro_path(@carro) %> |
-<%= link_to 'Back', carros_path %>
