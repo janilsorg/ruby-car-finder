@@ -16,6 +16,12 @@ class ImportDataCsvJob < ApplicationJob
   def perform(*args)
     # Delete all
     # Post.delete_all
+    Carro.delete_all
+    Modelo.delete_all
+    Cor.delete_all
+    Corpo.delete_all
+    Marca.delete_all
+    Transmission.delete_all
 
     vetor = []
     a = {'nome':'janilson', idade: 23, id: 21}
@@ -37,13 +43,10 @@ class ImportDataCsvJob < ApplicationJob
     puts 'Importing data from CSV file ...'
 
     filename = File.dirname(File.dirname(File.expand_path(__FILE__))) + '/data/vehicles_list.csv'
-    # Corpo.reflete('abcsdcsadadsa')
     cont = 0
-    
-    # Import dimensions
 
     CSV.foreach(filename, { :col_sep => ';' }) do |row|
-      
+
       if (cont>0)
 
         corpo = row[8] #DIMENSION
@@ -56,20 +59,20 @@ class ImportDataCsvJob < ApplicationJob
           arr_body.push(v)
           id_corpo = c.id
         end
-
+        
         marca = row[3]  #DIMENSION
-        # id_marca = procura(, marca, :body_type)
-        # if id_marca == 0
-        #   c = Marca.new
-        #   c.nome = corpo
-        #   c.save
-        #   v = {'nome': marca, id: c.id}
-        #   arr_marca.push(v)
-        #   id_marca = c.id
-        # end
-
+        id_marca = procura(arr_marca, marca, :nome)
+        if id_marca == 0
+          c = Marca.new
+          c.nome = marca
+          c.save
+          v = {'nome': marca, id: c.id}
+          arr_marca.push(v)
+          id_marca = c.id
+        end
+        
         modelo = row[4] #DIMENSION
-        id_modelo = procura(arr_body, modelo, :nome_modelo)
+        id_modelo = procura(arr_modelo, modelo, :nome_modelo)
         if id_modelo == 0
           c = Modelo.new
           c.nome_modelo = modelo
@@ -78,9 +81,20 @@ class ImportDataCsvJob < ApplicationJob
           arr_modelo.push(v)
           id_modelo = c.id
         end 
-
+        
+        # COR!!! TO DO
         exterior = row[11] #DIMENSION
-
+        id_cor = procura(arr_exterior, exterior, :color_name)
+        if id_cor == 0
+          c = Cor.new
+          c.color_name = exterior
+          c.save
+          v = {'color_name': exterior, id: c.id}
+          arr_exterior.push(v)
+          id_cor = c.id
+        end
+        
+        
         transmission = row[14] #DIMENSION
         id_transmission = procura(arr_transm, transmission, :transmission_type)
         if id_transmission == 0
@@ -92,39 +106,41 @@ class ImportDataCsvJob < ApplicationJob
           id_transmission = c.id
         end 
         
-
-
-        vin =  row[0] #string
-        grade = row[1] #str
-        serie = row[5] #STR
-        ano = row[6] #INT
-        preco = row[7] #INT
-        cilindro = row[9] #SMALLINT
-        displacement = row[10] #ATT STR(4)
-        interior = row[12] #COR
-        mileage = row[13] #INT
-        upholstery = row[15] 
-        enddate = row[16] #DATE
-        abglocation = row[17]
-        drivetrain = row[22] #STR(3)
-        conditionreport = row[23] #URL
-
-        stocknumber = row[2] #empty
-        buydate = row[18] #empty
-        buyername = row[19] #empty
-        watchedby = row[20] #empty
-        dealershipname = row[21] #empty
-        salesrep = row[24] #empty
-
-        # puts conditionreport
+        # novo_carro = Carro.new
         
+        # novo_carro.transmission_id = id_transmission
+        # novo_carro.cor_id = id_cor
+        # novo_carro.modelo_id = id_modelo
+        # novo_carro.corpo_id = id_corpo
+        # novo_carro.marca_id = id_marca
+
+
+        # novo_carro.vin =  row[0] #string
+        # novo_carro.grade = row[1] #str
+        # novo_carro.serie = row[5] #STR
+        # novo_carro.ano = row[6] #INT
+        # novo_carro.preco = row[7] #INT
+        # novo_carro.cilindro = row[9] #SMALLINT
+        # novo_carro.displacement = row[10] #ATT STR(4)
+        # novo_carro.interior = row[12] #COR
+        # novo_carro.mileage = row[13] #INT
+        # novo_carro.upholstery = row[15] 
+        # novo_carro.enddate = row[16] #DATE
+        # novo_carro.abglocation = row[17]
+        # novo_carro.drivetrain = row[22] #STR(3)
+        # novo_carro.conditionreport = row[23] #URL
+
+        # novo_carro.stocknumber = row[2] #empty
+        # novo_carro.buydate = row[18] #empty
+        # novo_carro.buyername = row[19] #empty
+        # novo_carro.watchedby = row[20] #empty
+        # novo_carro.dealershipname = row[21] #empty
+        # novo_carro.salesrep = row[24] #empty
         
       end
       cont += 1
     end
     # puts cont
-    # puts '########ENDD'
-    puts arr_body
-    puts arr_body.class
+    
   end
 end

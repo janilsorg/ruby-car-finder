@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_104716) do
+ActiveRecord::Schema.define(version: 2020_07_01_105433) do
 
   create_table "carros", force: :cascade do |t|
     t.string "nome"
@@ -22,6 +22,25 @@ ActiveRecord::Schema.define(version: 2020_07_01_104716) do
     t.integer "corpo_id"
     t.integer "transmission_id"
     t.integer "cor_id"
+    t.string "vin"
+    t.string "grade"
+    t.string "serie"
+    t.integer "preco"
+    t.integer "cilindro"
+    t.string "displacement"
+    t.string "interior"
+    t.integer "mileage"
+    t.string "upholstery"
+    t.date "enddate"
+    t.string "abglocation"
+    t.string "drivetrain"
+    t.string "conditionreport"
+    t.string "stocknumber"
+    t.date "buydate"
+    t.string "buyername"
+    t.string "watchedby"
+    t.string "dealershipname"
+    t.string "salesrep"
     t.index ["cor_id"], name: "index_carros_on_cor_id"
     t.index ["corpo_id"], name: "index_carros_on_corpo_id"
     t.index ["marca_id"], name: "index_carros_on_marca_id"

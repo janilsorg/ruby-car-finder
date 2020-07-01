@@ -4,11 +4,18 @@ class CarrosController < ApplicationController
   # GET /carros
   # GET /carros.json
   def index
-    # ImportDataCsvJob.perform_later
+    ImportDataCsvJob.perform_later
     
     # cor, mileage, body, price
 
     # Cor TO DO - filter variable
+    @cores = Cor.all
+    @cor = params[:cor]
+    if  @cor.nil? || @cor.empty?
+      @cores = Cor.all
+    else
+      @cores = Cor.where("cor_id = ?", @cor)
+    end 
 
     # Body - Corpo, body_type
     @corpos = Corpo.all
