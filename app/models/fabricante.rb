@@ -1,2 +1,0 @@
-class Fabricante < ApplicationRecord
-end

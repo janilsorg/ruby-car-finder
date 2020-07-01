@@ -12,6 +12,7 @@ class CarrosController < ApplicationController
       @got_data = true
     else
       @got_data = false
+      ImportDataCsvJob.perform_later
     end
 
     @cor = params[:cor]

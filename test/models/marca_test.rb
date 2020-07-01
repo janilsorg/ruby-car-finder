@@ -1,7 +1,11 @@
-require 'test_helper'
+require './test_helper'
 
 class MarcaTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
+  # ImportDataCsvJob.procura()
+
+  
+  
 end

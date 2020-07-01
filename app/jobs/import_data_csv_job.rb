@@ -14,24 +14,14 @@ class ImportDataCsvJob < ApplicationJob
   end
 
   def perform(*args)
-    # Delete all
-    # Post.delete_all
+    
+    # Delete all data
     Carro.delete_all
     Modelo.delete_all
     Cor.delete_all
     Corpo.delete_all
     Marca.delete_all
     Transmission.delete_all
-
-    vetor = []
-    a = {'nome':'janilson', idade: 23, id: 21}
-    b = {'nome':'aluno2', idade: 35, id:2}
-    vetor.push(a)
-    vetor.push(b)
-    
-    resultado = procura(vetor, 'janilson', :nome)
-    puts resultado.to_s
-
 
     arr_body = []
     arr_modelo = []
