@@ -12,9 +12,10 @@ In order to import this data to the SQLite database, I've created a job script l
 </p>
 
 ## RUNNING THE APPLICATION
-<p>Run the bundle install</p>
-bundle install
-<p>Run the migration</p>
+## Run the bundle install
+```bundle install```
+## Run the migration
+
 ```
 rails db:migrate
 ```
