@@ -13,7 +13,7 @@ In order to import this data to the SQLite database, I've created a job script l
 
 ## RUNNING THE APPLICATION
 <p>Run the bundle install</p>
-```
+```ruby
 bundle install
 ```
 <p>Run the migration</p>
@@ -29,4 +29,3 @@ rails s
 
 ## Improvements and thoughts
  - I think I shall re analyse the normalization due to the many DB request the index makes in order to get the lookup fields such as BODY, COLORS, etc
- 
