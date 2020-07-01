@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_014151) do
+ActiveRecord::Schema.define(version: 2020_07_01_104716) do
 
   create_table "carros", force: :cascade do |t|
     t.string "nome"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2020_07_01_014151) do
     t.integer "modelo_id"
     t.integer "corpo_id"
     t.integer "transmission_id"
+    t.integer "cor_id"
+    t.index ["cor_id"], name: "index_carros_on_cor_id"
     t.index ["corpo_id"], name: "index_carros_on_corpo_id"
     t.index ["marca_id"], name: "index_carros_on_marca_id"
     t.index ["modelo_id"], name: "index_carros_on_modelo_id"
@@ -29,6 +31,12 @@ ActiveRecord::Schema.define(version: 2020_07_01_014151) do
 
   create_table "corpos", force: :cascade do |t|
     t.string "body_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cors", force: :cascade do |t|
+    t.string "color_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -52,6 +60,7 @@ ActiveRecord::Schema.define(version: 2020_07_01_014151) do
   end
 
   add_foreign_key "carros", "corpos"
+  add_foreign_key "carros", "cors"
   add_foreign_key "carros", "marcas"
   add_foreign_key "carros", "modelos"
   add_foreign_key "carros", "transmissions"
