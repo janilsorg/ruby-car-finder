@@ -4,11 +4,33 @@ class CarrosController < ApplicationController
   # GET /carros
   # GET /carros.json
   def index
-    @marcas = Marca.all
-    @teste = params[:marca]
+    # ImportDataCsvJob.perform_later
+    
+    # cor, mileage, body, price
 
-    @carros = Carro.all
-    @carros = Carro.where("marca_id = ?", @teste)
+    # Cor TO DO
+
+    # Body - Corpo, body_type
+    @corpos = Corpo.all
+    @corpo = params[:body]
+    if  @corpo.nil? || @corpo.empty?
+      @carros = Carro.all
+    else
+      @carros = Carro.where("marca_id = ?", @corpo)
+    end 
+
+    # mileage
+    # price
+
+    # Marca
+    @marcas = Marca.all
+    @marca = params[:marca]
+    if  @marca.nil? || @marca.empty?
+      @carros = Carro.all
+    else
+      @carros = Carro.where("marca_id = ?", @marca)
+    end 
+
 
   end
 

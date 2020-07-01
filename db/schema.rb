@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_30_010632) do
+ActiveRecord::Schema.define(version: 2020_07_01_014151) do
 
   create_table "carros", force: :cascade do |t|
     t.string "nome"
@@ -45,13 +45,6 @@ ActiveRecord::Schema.define(version: 2020_06_30_010632) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "modelos_copy", force: :cascade do |t|
-    t.string "nome_modelo"
-    t.integer "carro_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "transmissions", force: :cascade do |t|
     t.string "transmission_type"
     t.datetime "created_at", precision: 6, null: false
@@ -62,5 +55,4 @@ ActiveRecord::Schema.define(version: 2020_06_30_010632) do
   add_foreign_key "carros", "marcas"
   add_foreign_key "carros", "modelos"
   add_foreign_key "carros", "transmissions"
-  add_foreign_key "modelos_copy", "carros"
 end

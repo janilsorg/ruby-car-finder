@@ -1,37 +1,55 @@
 <div class="mt-2 ml-3 pt-5">
-<h1>Car List</h1>
+<h1>Car Finder</h1>
 <p id="notice"><%= notice %></p>
 
 <div class="row">
+  <% if @carros.present?%>
+
+
   <div class="col-md-2">
 
 
     <form action="/" method="GET" class="form">
       <div class="form-group ">
       <div class="d-flex flex-column">
-        <label for="exampleInputEmail1">Marca</label>
-        <select class="form-control" name="marca" id="exampleFormControlSelect1">
-          <% @marcas.each do |c| %>
-          <option value=<%=c.id %> 
-          <% if (@teste == c.id.to_s) %>
-            selected="selected"
-          <% end %>
+        <label for="body">Body</label>
+        <select class="form-control" name="body" id="exampleFormControlSelect1">
+        <option value=''>-- All --</option>
           
-          ><%=c.nome %></option>
-          <% end %>
+          
         </select>
       </div>
       </div>
       <div class="form-group ">
         <div class="d-flex flex-column">
-          <label for="exampleInputPassword1">Cor</label>
-          <select class="form-control" name="cor" id="exampleFormControlSelect2">
-            <% @marcas.each do |c| %>
-            <option value=<%=c.id %> ><%=c.nome %></option>
-            <% end %>
+          <label for="color">Color</label>
+          <select class="form-control" name="color" id="exampleFormControlSelect2">
+            <option value=''>-- All --</option>
           </select>
         </div>  
       </div>
+      
+      <div class="form-group ">
+        <div class="d-flex flex-column">
+          <label for="price">Max Price</label>
+          <input class="form-control" type="text" name="price" id="m_ini">
+        </div>  
+      </div>
+
+      <div class="form-group ">
+        <div class="d-flex flex-column">
+          <label for="m_ini">Mileage Min</label>
+          <input class="form-control" type="text" name="m_ini" id="m_ini">
+        </div>  
+      </div>
+      
+      <div class="form-group ">
+        <div class="d-flex flex-column">
+          <label for="m_end">Mileage Max</label>
+          <input class="form-control" type="text" name="m_end" id="m_ini">
+        </div>  
+      </div>
+
       <div class="form-group ">
         <div class="d-flex flex-column">
           <button type="submit" class="btn btn-primary">Filter</button>
@@ -40,11 +58,12 @@
     </form>
 
     <div class="d-flex flex-column">
-    <%= link_to 'Add new Carro', new_carro_path, :class => 'btn btn-info my-2' %>
+      <%= link_to 'Add new Carro', new_carro_path, :class => 'btn btn-info my-2' %>
     </div>
     
   </div> <!-- END COL 1-->
   <div class="col-md-9">
+    
     <div class="row">
         <% @carros.each do |carro| %>
           <div class="col-md-4">
@@ -66,12 +85,22 @@
           </div>
         <% end %>
       </div>
+    
 
   </div>
 
 
+
 </div> <!-- END ROW-->
+
+<% else %>
+  <div class="container text-center">
+    <h1>No records were found</h1>
+    <h3>Maybe you should run the migration</h3>
+  </div>
   
+<% end %>  
+
 </div> <!-- END CONTAINER -->
   
 
