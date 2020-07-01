@@ -6,7 +6,7 @@ class CarrosController < ApplicationController
   def index
     # ImportDataCsvJob.perform_later
   
-    @carros = Carro.all.limit(20)
+    @carros = Carro.all
     
     if @carros.length > 0
       @got_data = true
