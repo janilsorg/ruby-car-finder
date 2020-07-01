@@ -13,10 +13,14 @@ In order to import this data to the SQLite database, I've created a job script l
 
 ## RUNNING THE APPLICATION
 <p>Run the bundle install</p>
-```ruby
+```
 bundle install
 ```
 <p>Run the migration</p>
+```
+npm install
+```
+
 ```
 rails db:migrate
 ```
