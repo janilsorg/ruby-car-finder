@@ -27,5 +27,7 @@ rails db:migrate
 rails s
 ```
 
+## The first time running the app the data will take a few seconds to be imported, please wait for a while then restart the page
+
 ## Improvements and thoughts
  - I think I shall re analyse the normalization due to the many DB request the index makes in order to get the lookup fields such as BODY, COLORS, etc
