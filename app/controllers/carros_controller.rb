@@ -8,7 +8,7 @@ class CarrosController < ApplicationController
     
     # cor, mileage, body, price
 
-    # Cor TO DO
+    # Cor TO DO - filter variable
 
     # Body - Corpo, body_type
     @corpos = Corpo.all
@@ -16,7 +16,7 @@ class CarrosController < ApplicationController
     if  @corpo.nil? || @corpo.empty?
       @carros = Carro.all
     else
-      @carros = Carro.where("marca_id = ?", @corpo)
+      @carros = Carro.where("corpo_id = ?", @corpo)
     end 
 
     # mileage
